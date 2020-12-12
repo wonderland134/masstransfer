@@ -15,7 +15,7 @@ intensity_coeff = 42500
 
 target_time = np.array([4*60, 60*60])
 
-D = 2.2*10**-6 		#cm^2/s
+D = 1.8*10**-6 		    #cm^2/s, Bovine alpha-Chymotrypsin through 6% collagen
 L = 4 					#cm
 x_array = np.hstack([np.arange(0,0.6,0.1), np.arange(0.6,1.4,0.001), np.arange(1.4,L+0.2,0.2)])
 np.save('x_array.npy', x_array)
@@ -90,7 +90,7 @@ for i in range(len(t_array)):
 
 plt.xlabel('Distance in um')
 plt.ylabel('Intensity')
-plt.title('Emulation')
+plt.title('Emulation result')
 plt.xlim([0,3000])
 plt.ylim([0,25000])
 plt.legend()

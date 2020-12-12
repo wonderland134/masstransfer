@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import sympy as sp
 
 # time = 4 min and 60min
 #
@@ -12,7 +13,8 @@ class emulate():
 		self.x_array = np.linspace(0, self.L, 100) #about distance
 		self.t_array = np.array([4, 60])*60 #about time
 		self.y_array = np.zeros((np.size(self.t_array), np.size(self.x_array))) #about normalized intensity
-		
+		self.intensity_coeff = 21000
+        
 	def calc(self):
 		x_array = self.x_array
 		y_array = self.y_array
@@ -28,7 +30,7 @@ class emulate():
 
 	def plotting(self):
 		x_array = self.x_array*10000
-		y_array = self.y_array*21500
+		y_array = self.y_array*self.intensity_coeff
 		t_array = self.t_array
 
 		plt.close()
@@ -36,7 +38,7 @@ class emulate():
 			plt.plot(x_array, y_array[i], label = 't = {} min'.format(t_array[i]/60))
 		plt.grid()
 		plt.xlabel('distance (um)')
-		plt.ylabel('normalized intensity')
+		plt.ylabel('intensity')
 		plt.title(self.label)
 		plt.legend()
 		plt.ylim([0,25000])
@@ -44,6 +46,6 @@ class emulate():
 		plt.show()
 
 if __name__ == '__main__':
-	test = emulate(2.2*10**-6, 'test')
+	test = emulate(1.8*10**-6, 'Emulated by erfc')
 	test.calc()
 	test.plotting()
