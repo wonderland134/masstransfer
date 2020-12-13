@@ -11,11 +11,11 @@ def find_in(array, target):
 Basis setup below
 '''
 
-intensity_coeff = 42500
+intensity_coeff = 21000/25
 
 target_time = np.array([4*60, 60*60])
 
-D = 1.8*10**-6 		    #cm^2/s, Bovine alpha-Chymotrypsin through 6% collagen
+D = 2.25*10**-6 		    #cm^2/s, Bovine alpha-Chymotrypsin through 6% collagen
 L = 4 					#cm
 x_array = np.hstack([np.arange(0,0.6,0.1), np.arange(0.6,1.4,0.001), np.arange(1.4,L+0.2,0.2)])
 np.save('x_array.npy', x_array)
@@ -24,7 +24,7 @@ nt = 100000
 t_array = np.linspace(0, target_time[-1], nt)
 dt = t_array[1] - t_array[0]
 
-C_init = 1
+C_init = 50
 C_lim = 0
 
 C_array = np.zeros_like(x_array)+(C_init+C_lim)/2		#mol/ml
@@ -85,7 +85,7 @@ for i in range(len(t_array)):
     if flag != -1:
         t = np.round_(t_array[flag]/60,0)
         np.save('{}min_sample.npy'.format(t), C_array)
-        plt.plot((x_array[xi_1:xi_2]-x_array[xi_1])*10000, C_array[xi_1:xi_2]*intensity_coeff, label = 't = {} min'.format(t))
+        plt.plot((x_array[xi_1:xi_2]-x_array[xi_1])*10000, C_array[xi_1:xi_2]*intensity_coeff+769.23, label = 't = {} min'.format(t))
         flag = -1
 
 plt.xlabel('Distance in um')
@@ -96,3 +96,4 @@ plt.ylim([0,25000])
 plt.legend()
 plt.grid()
 plt.show()
+

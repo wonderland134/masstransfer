@@ -41,7 +41,6 @@ class emulate():
             for j in range(len(y_array[i])):
                 target = y_array_temp[i][j]
                 y_array[i][j] = result[0]*target+result[1]
-                print(y_array[i][j])
         self.y_array = y_array
 
     def plotting(self):
